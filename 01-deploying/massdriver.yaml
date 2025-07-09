@@ -1,0 +1,110 @@
+schema: draft-07
+name: "getting-started"
+description: "A simple bundle that demonstrates how Massdriver's bundle and provisioning system works."
+source_url: github.com/YOUR_NAME_HERE/getting-started
+type: infrastructure
+
+steps:
+  - path: src
+    provisioner: opentofu
+
+# Params will be presented in the UI as a form for users to fill out
+params:
+  # Examples will show up as configuration presets in the UI
+  examples:
+    - __name: Production
+      pet:
+        length: 3
+      password:
+        length: 16
+        enable_special: true
+      shuffle:
+        words: ["foo", "bar", "baz"]
+    - __name: Staging
+      pet:
+        length: 2
+      password:
+        length: 8
+        enable_special: false
+      shuffle:
+        words: ["lorem", "ipsum", "dolor"]
+  required:
+    - pet
+    - password
+    - shuffle
+  properties:
+    pet:
+      type: object
+      title: Pet Configuration
+      required:
+        - length
+      properties:
+        length:
+          type: integer
+          title: Pet Name Length
+          description: Number of words in the random pet name - demonstrates enum
+          default: 2
+          enum: [1, 2, 3, 4, 5]
+    password:
+      type: object
+      title: Password Configuration
+      required:
+        - length
+        - enable_special
+      properties:
+        length:
+          type: integer
+          title: Password Length
+          description: Length of the generated password - demonstrates integer parameter with validation
+          # this marks the field as immutable in the UI, meaning it cannot be changed by the user
+          $md.immutable: true
+          default: 12
+          minimum: 8
+          maximum: 20
+        enable_special:
+          type: boolean
+          title: Enable Special Characters
+          description: Include special characters in generated password - demonstrates boolean parameter
+          $md.immutable: true
+          default: true
+    shuffle:
+      type: object
+      title: Shuffle Configuration
+      required:
+      - words
+      properties:
+        words:
+          type: array
+          title: String List
+          description: "List of strings for shuffling - demonstrates array parameter. NOTE: Changing these values once deployed will cause a failure in order to demonstrate to OPA preventing resource deletion."
+          items:
+            type: string
+          default: ["item1", "item2", "item3"]
+          minItems: 1
+          maxItems: 10
+
+
+# Named list of input connections (artifacts) (map[name]artifact)
+# Learn more about connections: https://docs.massdriver.cloud/concepts/connections
+connections:
+  properties: {}
+
+
+# Named list of output artifacts  (map[name]artifact)
+# Learn more about artifacts: https://docs.massdriver.cloud/concepts/artifacts
+artifacts:
+  properties: {}
+  # required:
+  #   - your_first_artifact
+  # properties:
+  #   your_first_artifact:
+  #     $ref: chrissbx/getting-started
+
+
+# Customize the UI for your bundle
+# learn more about widgets & fields: https://docs.massdriver.cloud/bundles/custom-widgets-and-fields
+ui:
+  ui:order:
+    - pet
+    - password
+    - shuffle

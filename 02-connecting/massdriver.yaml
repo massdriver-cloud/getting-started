@@ -1,0 +1,33 @@
+schema: draft-07
+name: "connecting-bundles"
+description: "Step 2 of Massdriver's 'getting started' guide, demonstrating how to connect bundles together."
+type: infrastructure
+
+steps:
+  - path: src
+    provisioner: opentofu
+  
+params:
+  properties: {}
+
+
+# Named list of input connections (artifacts) (map[name]artifact)
+# Learn more about connections: https://docs.massdriver.cloud/concepts/connections
+connections:
+  required:
+    - your_first_connection
+  properties:
+    your_first_connection:
+      $ref: <your-organization-id>/getting-started
+
+
+# Named list of output artifacts  (map[name]artifact)
+# Learn more about artifacts: https://docs.massdriver.cloud/concepts/artifacts
+artifacts:
+  properties: {}
+
+# Customize the UI for your bundle
+# learn more about widgets & fields: https://docs.massdriver.cloud/bundles/custom-widgets-and-fields
+ui:
+  ui:order:
+    - "*"

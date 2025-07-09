@@ -1,0 +1,51 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$md": {
+        "name": "getting-started"
+    },
+    "additionalProperties": false,
+    "description": "A basic example of an artifact definition to be paired with the getting-started bundle in step 1.",
+    "title": "Getting Started",
+    "type": "object",
+    "required": [
+        "data",
+        "specs"
+    ],
+    "properties": {
+        "data": {
+            "properties": {
+                "pet-name": {
+                    "title": "Pet Name",
+                    "description": "A field to store the generated pet name",
+                    "type": "string"
+                },
+                "password": {
+                    "title": "Password",
+                    "description": "A field to store the generated password",
+                    "type": "string"
+                },
+                "shuffle": {
+                    "title": "Shuffle",
+                    "description": "A field to store the shuffled words",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            },
+            "required": [
+                "pet-name",
+                "password",
+                "shuffle"
+            ],
+            "title": "Artifact Data",
+            "type": "object"
+        },
+        "specs": {
+            "additionalProperties": false,
+            "properties": {},
+            "required": [],
+            "type": "object"
+        }
+    }
+}
