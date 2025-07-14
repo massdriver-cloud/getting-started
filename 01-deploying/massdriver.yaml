@@ -1,7 +1,6 @@
 schema: draft-07
 name: "getting-started"
 description: "A simple bundle that demonstrates how Massdriver's bundle and provisioning system works."
-source_url: github.com/YOUR_NAME_HERE/getting-started
 type: infrastructure
 
 steps:
@@ -98,7 +97,7 @@ artifacts:
   #   - your_first_artifact
   # properties:
   #   your_first_artifact:
-  #     $ref: chrissbx/getting-started
+  #     $ref: <your-organization-id>/getting-started
 
 
 # Customize the UI for your bundle
