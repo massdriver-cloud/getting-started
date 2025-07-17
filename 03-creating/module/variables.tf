@@ -17,7 +17,7 @@ variable "app_name" {
 }
 
 variable "region" {
-  description = "AWS region or cloud region"
+  description = "AWS region to deploy to"
   type        = string
   default     = "us-west-2"
 }
@@ -39,11 +39,6 @@ variable "port_range" {
     min = number
     max = number
   })
-}
-
-variable "available_zones" {
-  description = "List of available zones"
-  type        = list(string)
 }
 
 variable "zone_count" {

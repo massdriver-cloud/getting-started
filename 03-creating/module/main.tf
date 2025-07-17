@@ -11,11 +11,23 @@ resource "random_password" "db_password" {
   upper   = var.password_config.include_upper
   lower   = var.password_config.include_lower
   numeric = var.password_config.include_numeric
+
+  keepers = {
+    length          = tostring(var.password_config.length)
+    include_special = tostring(var.password_config.include_special)
+    include_upper   = tostring(var.password_config.include_upper)
+    include_lower   = tostring(var.password_config.include_lower)
+    include_numeric = tostring(var.password_config.include_numeric)
+  }
 }
 
 # Random bytes for encryption key
 resource "random_bytes" "encryption_key" {
   length = var.encryption_key_length
+
+  keepers = {
+    encryption_key_length = tostring(var.encryption_key_length)
+  }
 }
 
 # Random port assignment
@@ -24,7 +36,8 @@ resource "random_integer" "app_port" {
   max = var.port_range.max
 
   keepers = {
-    app_name = var.app_name
+    min = tostring(var.port_range.min)
+    max = tostring(var.port_range.max)
   }
 }
 
@@ -34,14 +47,14 @@ resource "random_shuffle" "availability_zones" {
   result_count = var.zone_count
 
   keepers = {
-    region = var.region
+    region     = var.region
+    zone_count = tostring(var.zone_count)
   }
 }
 
 locals {
   availability_zones_per_region = {
     "us-east-1" = ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d", "us-east-1e", "us-east-1f"]
-    "us-east-2" = ["us-east-2a", "us-east-2b", "us-east-2c"]
     "us-west-2" = ["us-west-2a", "us-west-2b", "us-west-2c", "us-west-2d"]
   }
 }
