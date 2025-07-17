@@ -6,6 +6,7 @@ This repository contains example bundles designed to teach you the fundamentals 
 
 - **01-deploying/** - Your first bundle: learn publishing, configuration, and deployment
 - **02-connecting/** - Bundle connections: learn how to share data between bundles
+- **03-creating/** - Bundle creation: create a bundle from an existing OpenTofu module
 - **artifact-definitions/** - Reusable schemas for type-safe bundle connections
 
 ## Follow the Guide
