@@ -7,7 +7,7 @@ output "generated_name" {
 
 output "secure_password" {
   description = "Generated password (sensitive)"
-  value       = random_password.password.result
+  value       = nonsensitive(random_password.password.result)
   sensitive   = true
 }
 
